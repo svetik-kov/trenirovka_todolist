@@ -15,7 +15,7 @@ let [tasks,setTasks] =useState([
     const removeTasks=(taskId:number)=>{
        setTasks(tasks.filter((el)=>el.id!==taskId))
     }
-    let taskForTodolist=tasks
+   /* let taskForTodolist=tasks
     if (filter==='active'){
         taskForTodolist=tasks.filter((el)=>el.isDone)
     }
@@ -25,13 +25,15 @@ let [tasks,setTasks] =useState([
 
     const changeFilter=(value:FilterValueType)=>{
         setFilter(value)
-    }
+    }*/
     return (
         <div className="App">
            <Todolist title={'What to learn'}
-                     tasks={taskForTodolist}
+                     tasks={tasks}
                      removeTasks={removeTasks}
-                     changeFilter={changeFilter}
+                     filter={filter}
+                     setFilter={setFilter}
+                    /* changeFilter={changeFilter}*/
            />
            {/* <Todolist title={'What to buy'} tasks={tasks2}/>*/}
         </div>
