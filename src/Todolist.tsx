@@ -30,6 +30,9 @@ export const Todolist = (props: TodolistType) => {
 
      }
     }
+    const changeFilterHandler=(value:FilterValueType)=>{
+        props.changeFilter(value)
+    }
     return (
         <div>
             <h3>{props.title}</h3>
@@ -57,9 +60,9 @@ export const Todolist = (props: TodolistType) => {
                 }
             </ul>
             <div>
-                <button onClick={()=>props.changeFilter('all')}>All</button>
-                <button onClick={()=>props.changeFilter('active')}>Active</button>
-                <button onClick={()=>props.changeFilter('completed')}>Completed</button>
+                <button onClick={()=>changeFilterHandler('all')}>All</button>
+                <button onClick={()=>changeFilterHandler('active')}>Active</button>
+                <button onClick={()=>changeFilterHandler('completed')}>Completed</button>
             </div>
         </div>
     )
