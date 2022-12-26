@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useState,KeyboardEvent} from "react";
 import {FilterValueType} from "./App";
+import {Button} from "./components/Button";
 
 type TasksType = {
     id: string
@@ -39,9 +40,8 @@ export const Todolist = (props: TodolistType) => {
             <div>
                 <input value={title} onChange={onChangeHandler}
                        onKeyDown={onKeyDownHandler}/>
-                <button
-                    onClick={addTaskHandler}
-                >+</button>
+                {/*<button onClick={addTaskHandler}>+</button>*/}
+                <Button name={'+'} callBack={addTaskHandler}/>
             </div>
             <ul>
                 {props.tasks.map((el)=>{
@@ -51,7 +51,8 @@ export const Todolist = (props: TodolistType) => {
                             <input type="checkbox"
                                    checked={el.isDone}/>
                             <span>{el.title}</span>
-                            <button onClick={()=>props.removeTasks(el.id)}>X</button>
+                           {/* <button onClick={()=>props.removeTasks(el.id)}>X</button>*/}
+                            <Button name={'X'} callBack={()=>props.removeTasks(el.id)}/>
                         </li>
                     )
 
@@ -60,9 +61,12 @@ export const Todolist = (props: TodolistType) => {
                 }
             </ul>
             <div>
-                <button onClick={()=>changeFilterHandler('all')}>All</button>
-                <button onClick={()=>changeFilterHandler('active')}>Active</button>
-                <button onClick={()=>changeFilterHandler('completed')}>Completed</button>
+                {/*<button onClick={()=>changeFilterHandler('all')}>All</button>*/}
+                {/*<button onClick={()=>changeFilterHandler('active')}>Active</button>*/}
+                {/*<button onClick={()=>changeFilterHandler('completed')}>Completed</button>*/}
+                <Button name={'All'} callBack={()=>changeFilterHandler('all')}/>
+                <Button name={'Active'} callBack={()=>changeFilterHandler('active')}/>
+                <Button name={'Completed'} callBack={()=>changeFilterHandler('completed')}/>
             </div>
         </div>
     )
