@@ -13,6 +13,10 @@ let [tasks,setTasks] =useState([
 ])
  const [filter,setFilter]=useState<FilterValueType>('all')
 
+    const changeCheckbox=(taskId:string,checkedValue: boolean)=>{
+    setTasks(tasks.map((el)=>el.id===taskId?{...el,isDone:checkedValue}:el))
+    }
+
     const addTask = (title:string) => {
      const newTask= { id: v1(), title, isDone: false }
         setTasks([newTask,...tasks])
@@ -39,6 +43,7 @@ let [tasks,setTasks] =useState([
                      removeTasks={removeTasks}
                      changeFilter={changeFilter}
                      addTask={addTask}
+                     changeCheckbox={changeCheckbox}
            />
            {/* <Todolist title={'What to buy'} tasks={tasks2}/>*/}
         </div>
