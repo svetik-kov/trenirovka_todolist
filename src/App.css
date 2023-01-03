@@ -6,3 +6,18 @@
 .App > div {
   margin-right: 50px;
 }
+.error {
+  border: red 3px solid;
+}
+
+.error-message {
+  color: red;
+}
+.is-done {
+  opacity: 0.5;
+}
+
+.active-filter {
+  background-color: aquamarine;
+}
+
