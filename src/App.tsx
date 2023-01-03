@@ -44,7 +44,7 @@ let [tasks,setTasks] =useState([
                      changeFilter={changeFilter}
                      addTask={addTask}
                      changeCheckbox={changeCheckbox}
-
+                     filter={filter}
            />
            {/* <Todolist title={'What to buy'} tasks={tasks2}/>*/}
         </div>

@@ -15,6 +15,7 @@ type TodolistType = {
     changeFilter: (value: FilterValueType) => void
     addTask: (title: string) => void
     changeCheckbox: (taskId: string, checkedValue: boolean) => void
+    filter:FilterValueType
 }
 
 export const Todolist = (props: TodolistType) => {
@@ -79,12 +80,12 @@ export const Todolist = (props: TodolistType) => {
                 }
             </ul>
             <div>
-                {/*<button onClick={()=>changeFilterHandler('all')}>All</button>*/}
-                {/*<button onClick={()=>changeFilterHandler('active')}>Active</button>*/}
-                {/*<button onClick={()=>changeFilterHandler('completed')}>Completed</button>*/}
-                <Button name={'All'} callBack={() => changeFilterHandler('all')}/>
+                <button className={props.filter==='all' ? 'active-filter':''} onClick={()=>changeFilterHandler('all')}>All</button>
+                <button className={props.filter==='active'? 'active-filter':''}  onClick={()=>changeFilterHandler('active')}>Active</button>
+                <button className={props.filter==='completed'? 'active-filter':''} onClick={()=>changeFilterHandler('completed')}>Completed</button>
+                {/*<Button  name={'All'} callBack= {() => changeFilterHandler('all')}/>
                 <Button name={'Active'} callBack={() => changeFilterHandler('active')}/>
-                <Button name={'Completed'} callBack={() => changeFilterHandler('completed')}/>
+                <Button name={'Completed'} callBack={() => changeFilterHandler('completed')}/>*/}
             </div>
         </div>
     )
