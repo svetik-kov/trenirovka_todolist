@@ -9,10 +9,11 @@ type TasksType = {
 }
 
 type TodolistType = {
+    todolistId:string
     title: string
     tasks: TasksType[]
     removeTasks: (taskId: string) => void
-    changeFilter: (value: FilterValueType) => void
+    changeFilter: ( todolistId:string,value: FilterValueType) => void
     addTask: (title: string) => void
     changeCheckbox: (taskId: string, checkedValue: boolean) => void
     filter:FilterValueType
@@ -41,7 +42,7 @@ export const Todolist = (props: TodolistType) => {
         }
     }
     const changeFilterHandler = (value: FilterValueType) => {
-        props.changeFilter(value)
+        props.changeFilter(props.todolistId,value)
     }
     const onChangeCheckboxHandler = (taskId: string, checkedValue: boolean) => {
         props.changeCheckbox(taskId, checkedValue)
