@@ -2,7 +2,7 @@ import React, {ChangeEvent, useState, KeyboardEvent} from "react";
 import {FilterValueType} from "./App";
 import {Button} from "./components/Button";
 
-type TasksType = {
+export type TasksType = {
     id: string
     title: string
     isDone: boolean
@@ -12,10 +12,10 @@ type TodolistType = {
     todolistId:string
     title: string
     tasks: TasksType[]
-    removeTasks: (taskId: string) => void
+    removeTasks: (todolistId:string,taskId: string) => void
     changeFilter: ( todolistId:string,value: FilterValueType) => void
-    addTask: (title: string) => void
-    changeCheckbox: (taskId: string, checkedValue: boolean) => void
+    addTask: (todolistId:string,title: string) => void
+    changeCheckbox: (todolistId:string,taskId: string, checkedValue: boolean) => void
     filter:FilterValueType
 }
 
@@ -29,7 +29,7 @@ export const Todolist = (props: TodolistType) => {
     }
     const addTaskHandler = () => {
         if (title.trim()) {
-            props.addTask(title.trim())
+            props.addTask(props.todolistId,title.trim())
             setTitle('')
         } else {
             setError("Title is required")
@@ -45,7 +45,7 @@ export const Todolist = (props: TodolistType) => {
         props.changeFilter(props.todolistId,value)
     }
     const onChangeCheckboxHandler = (taskId: string, checkedValue: boolean) => {
-        props.changeCheckbox(taskId, checkedValue)
+        props.changeCheckbox(props.todolistId,taskId, checkedValue)
     }
     return (
         <div>
@@ -72,7 +72,7 @@ export const Todolist = (props: TodolistType) => {
                                    checked={el.isDone}/>
                             <span>{el.title}</span>
                             {/* <button onClick={()=>props.removeTasks(el.id)}>X</button>*/}
-                            <Button name={'X'} callBack={() => props.removeTasks(el.id)}/>
+                            <Button name={'X'} callBack={() => props.removeTasks(props.todolistId,el.id)}/>
                         </li>
                     )
 
