@@ -10,6 +10,9 @@ export type TodolistsType = {
 }
 
 export type FilterValueType = 'all' | 'active' | 'completed'
+type TasksStateType={
+    [key:string]:TasksType[]
+}
 
 function App() {
     let todolistID1 = v1()
@@ -20,7 +23,7 @@ function App() {
         {id: todolistID2, title: 'What to buy', filter: 'all'},
     ])
 
-    let [tasks, setTasks] = useState({
+    let [tasks, setTasks] = useState<TasksStateType>({
         [todolistID1]: [
             {id: v1(), title: 'HTML&CSS', isDone: true},
             {id: v1(), title: 'JS', isDone: true},
@@ -32,18 +35,10 @@ function App() {
             {id: v1(), title: 'GraphQL', isDone: false},
         ]
     })
-/*    let [todolists, setTodolists] = useState<Array<TodolistsType>>(
-        [
-            {id: v1(), title: 'What to learn', filter: 'all'},
-            {id: v1(), title: 'What to buy', filter: 'all'},
-        ]
-    )
-    let [tasks, setTasks] = useState([
-        {id: v1(), title: "HTML&CSS", isDone: true},
-        {id: v1(), title: "JS", isDone: true},
-        {id: v1(), title: "ReactJS", isDone: false}
-    ])*/
-    /*const [filter, setFilter] = useState<FilterValueType>('all')*/
+    const removeTodolist=(todolistId:string)=>{
+        setTodolists(todolists.filter(el=>el.id!==todolistId))
+        delete tasks[todolistId]
+    }
     const changeCheckbox = (todolistId:string,taskId: string, checkedValue: boolean) => {
         setTasks({...tasks,[todolistId]:tasks[todolistId].map(el=>el.id===taskId?{...el,isDone:checkedValue}:el)})
     }
@@ -81,6 +76,7 @@ function App() {
                         addTask={addTask}
                         changeCheckbox={changeCheckbox}
                         filter={el.filter}
+                        removeTodolist={removeTodolist}
                     />
                 )
             })}
