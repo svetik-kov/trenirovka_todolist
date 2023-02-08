@@ -36,12 +36,12 @@ export const Todolist = (props: TodolistType) => {
     const addTaskHandler = (title: string) => {
         props.addTask(props.todolistId, title)
     }
+    const onChangeCheckboxHandler = (taskId: string, checkedValue: boolean) => {
+        props.changeCheckbox(props.todolistId, taskId, checkedValue)
+    }
 
     const changeFilterHandler = (value: FilterValueType) => {
         props.changeFilter(props.todolistId, value)
-    }
-    const onChangeCheckboxHandler = (taskId: string, checkedValue: boolean) => {
-        props.changeCheckbox(props.todolistId, taskId, checkedValue)
     }
     const removeTodolistHandler = () => {
         props.removeTodolist(props.todolistId)
