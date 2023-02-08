@@ -44,8 +44,10 @@ export const AddItemForm = (props: AddItemFormType) => {
                 onChange={onChangeHandler}
                 onKeyDown={onKeyDownHandler}
                 id="outlined-basic"
-                label="Outlined"
-                variant="outlined"/>
+                label={error?"Title is required":"Please type your title"}
+                variant="outlined"
+            error={!!error}
+            />
             {/* <Button name={'+'} callBack={addTaskHandler}/>*/}
             <Button
                 variant="contained"
@@ -53,7 +55,7 @@ export const AddItemForm = (props: AddItemFormType) => {
                 onClick={addTaskHandler}
                 style={buttonStyles}
             >+</Button>
-            {error && <div className={'error-message'}> {error}</div>}
+           {/* {error && <div className={'error-message'}> {error}</div>}*/}
         </div>
     );
 };
