@@ -1,10 +1,11 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {Button} from "./components/Button";
 
-type AddItemFormType={
-    callBack:(title:string)=>void
+import Button from '@mui/material/Button'
+
+type AddItemFormType = {
+    callBack: (title: string) => void
 }
-export const AddItemForm = (props:AddItemFormType) => {
+export const AddItemForm = (props: AddItemFormType) => {
     const [title, setTitle] = useState<string>('')
     const [error, setError] = useState<string | null>(null)
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,12 +27,24 @@ export const AddItemForm = (props:AddItemFormType) => {
         }
     }
 
+    const buttonStyles={
+        maxWidth: '25px',
+        maxHeight: '25px',
+        minWidth: '25px',
+        minHeight: '25px'
+    }
     return (
         <div>
             <input className={error ? 'error' : ''}
                    value={title} onChange={onChangeHandler}
                    onKeyDown={onKeyDownHandler}/>
-            <Button name={'+'} callBack={addTaskHandler}/>
+            {/* <Button name={'+'} callBack={addTaskHandler}/>*/}
+            <Button
+                variant="contained"
+                size="small"
+                onClick={addTaskHandler}
+                style={buttonStyles}
+            >+</Button>
             {error && <div className={'error-message'}> {error}</div>}
         </div>
     );
