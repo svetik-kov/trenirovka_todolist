@@ -3,6 +3,8 @@ import {FilterValueType} from "./App";
 import {Button} from "./components/Button";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export type TasksType = {
     id: string
@@ -26,27 +28,7 @@ type TodolistType = {
 }
 
 export const Todolist = (props: TodolistType) => {
-    /* const [title, setTitle] = useState<string>('')
-     const [error, setError] = useState<string | null>(null)*/
 
-    /*const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value)
-        setError(null)
-    }
-    const addTaskHandler = () => {
-        if (title.trim()) {
-            props.addTask(props.todolistId, title.trim())
-            setTitle('')
-        } else {
-            setError("Title is required")
-        }
-    }
-    const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            addTaskHandler()
-
-        }
-    }*/
     const updateTaskHandler=(taskId:string,newTitle:string)=>{
         props.updateTask(props.todolistId,taskId,newTitle)
     }
@@ -72,7 +54,12 @@ export const Todolist = (props: TodolistType) => {
                {/* {props.title}*/}
                 <EditableSpan title={props.title} callBack={updateTodolistHandler}/>
 
-                <button onClick={removeTodolistHandler}>XXX</button>
+              {/*  <button onClick={removeTodolistHandler}>XXX</button>*/}
+
+                <IconButton aria-label="delete" onClick={removeTodolistHandler}>
+                    <DeleteIcon />
+                </IconButton>
+
             </h3>
             <AddItemForm callBack={addTaskHandler}/>
 
@@ -86,7 +73,15 @@ export const Todolist = (props: TodolistType) => {
                                    checked={el.isDone}/>
                           {/*  <span>{el.title}</span>*/}
                             <EditableSpan title={el.title} callBack={(newTitle:string)=>updateTaskHandler(el.id,newTitle)}/>
-                            <Button name={'X'} callBack={() => props.removeTasks(props.todolistId, el.id)}/>
+
+                           {/* <Button name={'X'} callBack={() => props.removeTasks(props.todolistId, el.id)}/>*/}
+                            <IconButton
+                                aria-label="delete"
+                                onClick={() => props.removeTasks(props.todolistId, el.id)}>
+                                <DeleteIcon />
+                            </IconButton>
+
+
                         </li>
                     )
 
