@@ -13,7 +13,7 @@ export type TodolistsType = {
 }
 
 export type FilterValueType = 'all' | 'active' | 'completed'
-type TasksStateType = {
+export type TasksStateType = {
     [key: string]: TasksType[]
 }
 
@@ -75,6 +75,7 @@ function App() {
         setTodolists(todolists.filter(el => el.id !== todolistId))
         delete tasks[todolistId]
     }
+
     return (
         <div className="App">
             <ButtonAppBar/>
