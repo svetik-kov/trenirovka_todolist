@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Checkbox from '@mui/material/Checkbox';
 import {ButtonWithMemo} from "./components/ButtonWithMemo";
+import {Task} from "./Task";
 
 export type TasksType = {
     id: string
@@ -30,16 +31,19 @@ type TodolistType = {
 }
 
 export const Todolist = memo((props: TodolistType) => {
-    console.log('Todolist')
-    const updateTaskHandler = ((taskId: string, newTitle: string) => {
+
+    const updateTaskHandler = useCallback(((taskId: string, newTitle: string) => {
         props.updateTask(props.todolistId, taskId, newTitle)
-    })
+    }),[props.updateTask,props.todolistId])
     const addTaskHandler = useCallback((title: string) => {
         props.addTask(props.todolistId, title)
     }, [props.addTask, props.todolistId])
-    const onChangeCheckboxHandler = (taskId: string, checkedValue: boolean) => {
+    const onChangeCheckboxHandler = useCallback((taskId: string, checkedValue: boolean) => {
         props.changeCheckbox(props.todolistId, taskId, checkedValue)
-    }
+    },[props.changeCheckbox,props.todolistId])
+    const removeTasksHandler=useCallback((taskId:string)=>{
+        props.removeTasks(props.todolistId,taskId)
+    },[props.removeTasks,props.todolistId])
 
     const changeFilterHandler = useCallback((value: FilterValueType) => {
         props.changeFilter(props.todolistId, value)
@@ -47,9 +51,9 @@ export const Todolist = memo((props: TodolistType) => {
     const removeTodolistHandler = () => {
         props.removeTodolist(props.todolistId)
     }
-    const updateTodolistHandler = (newTitle: string) => {
+    const updateTodolistHandler = useCallback((newTitle: string) => {
         props.updateTodolist(props.todolistId, newTitle)
-    }
+    },[props.updateTodolist,props.todolistId])
 
     let taskForTodolist = props.tasks
     if (props.filter === 'active') {
@@ -77,17 +81,18 @@ export const Todolist = memo((props: TodolistType) => {
                 {taskForTodolist.map((el) => {
 
                     return (
-                        <li key={el.id} className={el.isDone ? 'is-done' : ''}>
-                            {/* <input type="checkbox"
+                        <Task key={el.id} task={el} removeTasks={removeTasksHandler} changeCheckbox={onChangeCheckboxHandler} updateTask={ updateTaskHandler}/>
+                      /*  <li key={el.id} className={el.isDone ? 'is-done' : ''}>
+                            {/!* <input type="checkbox"
                                    onChange={(e) => onChangeCheckboxHandler(el.id, e.currentTarget.checked)}
-                                   checked={el.isDone}/>*/}
+                                   checked={el.isDone}/>*!/}
                             <Checkbox onChange={(e) => onChangeCheckboxHandler(el.id, e.currentTarget.checked)}
                                       checked={el.isDone}/>
-                            {/*  <span>{el.title}</span>*/}
+                            {/!*  <span>{el.title}</span>*!/}
                             <EditableSpan title={el.title}
                                           callBack={(newTitle: string) => updateTaskHandler(el.id, newTitle)}/>
 
-                            {/* <Button name={'X'} callBack={() => props.removeTasks(props.todolistId, el.id)}/>*/}
+                            {/!* <Button name={'X'} callBack={() => props.removeTasks(props.todolistId, el.id)}/>*!/}
                             <IconButton
                                 aria-label="delete"
                                 onClick={() => props.removeTasks(props.todolistId, el.id)}>
@@ -95,7 +100,7 @@ export const Todolist = memo((props: TodolistType) => {
                             </IconButton>
 
 
-                        </li>
+                        </li>*/
                     )
 
                 })

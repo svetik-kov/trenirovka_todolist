@@ -11,7 +11,6 @@ type ButtonWithMemoType={
 }
 export const ButtonWithMemo:React.FC<ButtonWithMemoType> = memo(({changeFilterHandler,color,name,variant}) => {
 
-
     return (
         <Button
             variant={variant}
