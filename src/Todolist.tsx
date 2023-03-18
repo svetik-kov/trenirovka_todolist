@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState, KeyboardEvent, useCallback} from "react";
+import React, {ChangeEvent, useState, KeyboardEvent, useCallback, memo} from "react";
 import {FilterValueType} from "./App";
 import Button from '@mui/material/Button';
 import {AddItemForm} from "./AddItemForm";
@@ -28,11 +28,11 @@ type TodolistType = {
 
 }
 
-export const Todolist = (props: TodolistType) => {
-
-    const updateTaskHandler = (taskId: string, newTitle: string) => {
+export const Todolist = memo((props: TodolistType) => {
+    console.log('Todolist')
+    const updateTaskHandler = ((taskId: string, newTitle: string) => {
         props.updateTask(props.todolistId, taskId, newTitle)
-    }
+    })
     const addTaskHandler = useCallback((title: string) => {
         props.addTask(props.todolistId, title)
     },[props.addTask,props.todolistId])
@@ -48,6 +48,14 @@ export const Todolist = (props: TodolistType) => {
     }
     const updateTodolistHandler = (newTitle: string) => {
         props.updateTodolist(props.todolistId, newTitle)
+    }
+
+    let taskForTodolist=props.tasks
+    if (props.filter === 'active') {
+        taskForTodolist =props.tasks.filter((el) => el.isDone)
+    }
+    if (props.filter === 'completed') {
+        taskForTodolist = props.tasks.filter((el) => !el.isDone)
     }
     return (
         <div>
@@ -65,7 +73,7 @@ export const Todolist = (props: TodolistType) => {
             <AddItemForm callBack={addTaskHandler}/>
 
             <ul>
-                {props.tasks.map((el) => {
+                {taskForTodolist.map((el) => {
 
                     return (
                         <li key={el.id} className={el.isDone ? 'is-done' : ''}>
@@ -114,4 +122,4 @@ export const Todolist = (props: TodolistType) => {
             </div>
         </div>
     )
-}
+})

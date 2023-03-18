@@ -6,7 +6,7 @@ type AddItemFormType = {
     callBack: (title: string) => void
 }
 export const AddItemForm = memo((props: AddItemFormType) => {
-    console.log('AddItemForm')
+
     const [title, setTitle] = useState<string>('')
     const [error, setError] = useState<string | null>(null)
 
