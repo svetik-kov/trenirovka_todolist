@@ -1,4 +1,4 @@
-import React, {Reducer, useReducer, useState} from 'react';
+import React, {Reducer, useCallback, useReducer, useState} from 'react';
 import './App.css';
 import {TasksType, Todolist} from "./Todolist";
 import {v1} from "uuid";
@@ -46,9 +46,9 @@ function AppWithRedux() {
     const changeCheckbox = (todolistId: string, taskId: string, checkedValue: boolean) => {
         dispatch(changeTaskStatusAC(taskId,checkedValue,todolistId))
     }
-    const addTask = (todolistId: string, title: string) => {
+    const addTask = useCallback((todolistId: string, title: string) => {
         dispatch(addTaskAC(title,todolistId))
-    }
+    },[dispatch])
     const removeTasks = (todolistId: string, taskId: string) => {
         dispatch(removeTaskAC(taskId,todolistId))
     }
@@ -59,10 +59,10 @@ function AppWithRedux() {
     const changeFilter = (todolistId: string, value: FilterValueType) => {
         dispatch(changeFilterAC(todolistId,value))
     }
-    const addTodolist = (newTitle: string) => {
+    const addTodolist = useCallback((newTitle: string) => {
         const action=addTodolistAC(newTitle)
         dispatch(action)
-    }
+    },[dispatch])
     const removeTodolist = (todolistId: string) => {
         const action=removeTodolistAC(todolistId)
         dispatch(action)
@@ -86,7 +86,7 @@ function AppWithRedux() {
                        }
 
                        return (
-                           <Grid item>
+                           <Grid key={el.id} item>
                                <Paper style={{padding:'10px'}}>
                            <Todolist
                                key={el.id}

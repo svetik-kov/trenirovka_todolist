@@ -1,13 +1,15 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
 
 type AddItemFormType = {
     callBack: (title: string) => void
 }
-export const AddItemForm = (props: AddItemFormType) => {
+export const AddItemForm = memo((props: AddItemFormType) => {
+    console.log('AddItemForm')
     const [title, setTitle] = useState<string>('')
     const [error, setError] = useState<string | null>(null)
+
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
         setError(null)
@@ -58,5 +60,5 @@ export const AddItemForm = (props: AddItemFormType) => {
            {/* {error && <div className={'error-message'}> {error}</div>}*/}
         </div>
     );
-};
+});
 

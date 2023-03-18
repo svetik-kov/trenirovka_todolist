@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState, KeyboardEvent} from "react";
+import React, {ChangeEvent, useState, KeyboardEvent, useCallback} from "react";
 import {FilterValueType} from "./App";
 import Button from '@mui/material/Button';
 import {AddItemForm} from "./AddItemForm";
@@ -33,9 +33,9 @@ export const Todolist = (props: TodolistType) => {
     const updateTaskHandler = (taskId: string, newTitle: string) => {
         props.updateTask(props.todolistId, taskId, newTitle)
     }
-    const addTaskHandler = (title: string) => {
+    const addTaskHandler = useCallback((title: string) => {
         props.addTask(props.todolistId, title)
-    }
+    },[props.addTask,props.todolistId])
     const onChangeCheckboxHandler = (taskId: string, checkedValue: boolean) => {
         props.changeCheckbox(props.todolistId, taskId, checkedValue)
     }
