@@ -22,6 +22,7 @@ import {
 } from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./state/store";
+import {CalculatorFactorial} from "./UseMemoExamply";
 
 export type TodolistsType = {
     id: string
@@ -112,7 +113,9 @@ function AppWithRedux() {
 
 
             {/* <Todolist title={'What to buy'} tasks={tasks2}/>*/}
+            <CalculatorFactorial/>
         </div>
+
     );
 }
 
