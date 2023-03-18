@@ -21,6 +21,9 @@ export const Task = memo(({task,removeTasks,changeCheckbox,updateTask}:TaskProps
     const onChangeCheckboxHandler = (taskId: string, checkedValue: boolean) => {
         changeCheckbox(taskId, checkedValue)
     }
+    const removeTaskHandler=(taskId: string)=>{
+        removeTasks( taskId)
+    }
     return (
         <div key={task.id} className={task.isDone ? 'is-done' : ''}>
             <Checkbox onChange={(e) => onChangeCheckboxHandler(task.id, e.currentTarget.checked)}
@@ -29,7 +32,7 @@ export const Task = memo(({task,removeTasks,changeCheckbox,updateTask}:TaskProps
                           callBack={(newTitle: string) => updateTaskHandler(task.id, newTitle)}/>
             <IconButton
                 aria-label="delete"
-                onClick={() => removeTasks( task.id)}>
+                onClick={() => removeTaskHandler( task.id)}>
                 <DeleteIcon/>
             </IconButton>
 
