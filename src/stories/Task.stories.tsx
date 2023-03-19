@@ -33,3 +33,27 @@ export const TaskIsDoneStory = Template.bind({});
 TaskIsDoneStory.args = {
   task:{id:'111',title:'JS',isDone: true},
 };
+
+const Template1: ComponentStory<typeof Task> = (args) => {
+  const [task,setTask]=useState({id:'111',title:'JS',isDone: false})
+
+  const changeCheckbox=(taskId: string, checkedValue: boolean)=>{
+    setTask({id:'111',title:'JS',isDone: checkedValue})
+  }
+
+  const updateTask=(taskId: string, newTitle: string)=>{
+    setTask({id:'111',title:newTitle,isDone: task.isDone})
+  }
+  const removeTasks=()=>{
+    action('removeTasks')
+  }
+  return (
+      <Task
+          removeTasks={removeTasks}
+          changeCheckbox={changeCheckbox}
+          updateTask={updateTask}
+          task={task}
+      />
+  )
+};
+export const TaskStory = Template1.bind({});
