@@ -113,7 +113,9 @@ function AppWithRedux() {
 
 
             {/* <Todolist title={'What to buy'} tasks={tasks2}/>*/}
-            <CalculatorFactorial/>
+
+
+           {/* <CalculatorFactorial/>*/}
         </div>
 
     );
