@@ -44,12 +44,10 @@ const Template1: ComponentStory<typeof Task> = (args) => {
   const updateTask=(taskId: string, newTitle: string)=>{
     setTask({id:'111',title:newTitle,isDone: task.isDone})
   }
-  const removeTasks=()=>{
-    action('removeTasks')
-  }
+
   return (
       <Task
-          removeTasks={removeTasks}
+          removeTasks={args.removeTasks}
           changeCheckbox={changeCheckbox}
           updateTask={updateTask}
           task={task}
